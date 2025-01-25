@@ -5,6 +5,7 @@ import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import Modal from "@/app/components/Modal";
 import BackButton from "@/app/components/BackButton";
+import HomeButton from "@/app/components/HomeButton";
 import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
 
@@ -176,6 +177,7 @@ export default function RepoChangelog({ params }: { params: Promise<PageParams> 
 
   return (
     <div className="min-h-screen p-8 relative">
+      <HomeButton />
       <BackButton />
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">

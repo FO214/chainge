@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import BackButton from "@/app/components/BackButton";
+import HomeButton from "@/app/components/HomeButton";
 
 interface Repository {
   id: number;
@@ -56,6 +57,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen p-8 relative">
+      <HomeButton />
       <BackButton />
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">Your Repositories</h1>
