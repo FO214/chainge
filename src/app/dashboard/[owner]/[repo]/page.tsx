@@ -33,11 +33,6 @@ const CommitGraph: React.FC<{ commits: Commit[] }> = ({ commits }) => {
     return <div className="text-center text-gray-500">No commits available for this repository.</div>;
   }
 
-  const dates = commits.map(commit => new Date(commit.date).getTime());
-  const minDate = Math.min(...dates);
-  const maxDate = Math.max(...dates);
-  const range = maxDate - minDate;
-
   const spacing = 95 / (commits.length - 1);
 
   return (
@@ -79,10 +74,12 @@ export default function RepoChangelog({ params }: { params: Promise<PageParams> 
     }
 
     const fetchCommits = async () => {
+      //@ts-ignore
       if (session?.accessToken) {
         try {
           const response = await fetch(`https://api.github.com/repos/${resolvedParams.owner}/${resolvedParams.repo}/commits`, {
             headers: {
+              //@ts-ignore
               Authorization: `Bearer ${session.accessToken}`,
             },
           });
@@ -135,6 +132,7 @@ export default function RepoChangelog({ params }: { params: Promise<PageParams> 
           })),
           owner: resolvedParams.owner,
           repo: resolvedParams.repo,
+          //@ts-ignore
           accessToken: session.accessToken,
         }),
       });

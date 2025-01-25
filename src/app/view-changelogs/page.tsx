@@ -30,6 +30,7 @@ const ViewChangelogs = () => {
         setRepositories(data);
       } catch (err) {
         setError('Error fetching repositories. Please try again.');
+        console.error(err);
       } finally {
         setLoading(false);
       }

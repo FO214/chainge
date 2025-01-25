@@ -5,7 +5,7 @@ import Commit from '@/app/models/Commit';
 import Changelog from '@/app/models/Changelog';
 
 const client = new Groq({
-  api_key: process.env.GROQ_API_KEY,
+  apiKey: process.env.GROQ_API_KEY,
 });
 
 export async function POST(request: Request) {
@@ -17,6 +17,7 @@ export async function POST(request: Request) {
   await connectMongoDB(); // Connect to MongoDB
 
   // Filter out commits that are already in the database
+  //@ts-ignore
   const newCommits = await Promise.all(commits.map(async (commit) => {
     const existingCommit = await Commit.findOne({ sha: commit.sha });
     if (!existingCommit) {
@@ -58,7 +59,7 @@ export async function POST(request: Request) {
 
   return NextResponse.json({ changelog });
 }
-
+//@ts-ignore
 async function generateChangelog(commits, owner, repo, accessToken) {
   const changelogEntries = [];
   const codeChangesPromises = [];
@@ -93,6 +94,7 @@ async function generateChangelog(commits, owner, repo, accessToken) {
 
   // Mark commits as having generated changelogs
   await Commit.updateMany(
+    //@ts-ignore
     { sha: { $in: commits.map(commit => commit.sha) } },
     { changelogGenerated: true }
   );
@@ -100,6 +102,7 @@ async function generateChangelog(commits, owner, repo, accessToken) {
   return `# Changelog\n\n${summary}`;
 }
 
+//@ts-ignore
 async function fetchCodeChanges(commit, owner, repo, accessToken) {
   const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits/${commit.sha}`, {
     headers: {
@@ -113,7 +116,6 @@ async function fetchCodeChanges(commit, owner, repo, accessToken) {
     return { commitSha: commit.sha, diff: `Error fetching changes - ${errorMessage.message}` };
   }
 
-  const commitData = await response.json();
   const diffResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits/${commit.sha}`, {
     headers: {
       Accept: 'application/vnd.github.v3.diff',
@@ -131,11 +133,7 @@ async function fetchCodeChanges(commit, owner, repo, accessToken) {
   return { commitSha: commit.sha, diff };
 }
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const owner = searchParams.get('owner');
-  const repo = searchParams.get('repo');
-
+export async function GET() {
   await connectMongoDB(); // Connect to MongoDB
 
   // Fetch changelogs from the database

@@ -25,9 +25,11 @@ export default function Dashboard() {
       router.push("/login");
     }
 
+    //@ts-ignore
     if (session?.accessToken) {
       fetch('https://api.github.com/user/repos', {
         headers: {
+          //@ts-ignore
           Authorization: `Bearer ${session.accessToken}`,
         },
       })
