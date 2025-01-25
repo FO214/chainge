@@ -3,19 +3,191 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --accent: #00ff9d;
+  --accent-glow: rgba(0, 255, 157, 0.15);
+  --surface: #171717;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Move fade effect to the viewport edges */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 15vw;
+  z-index: 2;
+  pointer-events: none;
+}
+
+body::before {
+  left: 0;
+  background: linear-gradient(to right, var(--background) 0%, transparent 100%);
+}
+
+body::after {
+  right: 0;
+  background: linear-gradient(to left, var(--background) 0%, transparent 100%);
+}
+
+.glow-effect {
+  box-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+  transition: box-shadow 1s ease;
+}
+
+.glow-effect:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 157, 0.8);
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  text-shadow: 0 0 10px rgba(0, 255, 157, 0.8);
+  color: var(--accent);
+}
+
+/* .hover:shadow-lg {
+  box-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+} */
+
+.border-green-500 {
+  border-color: rgba(0, 255, 157, 0.5); /* Dim green glow for the border */
+}
+
+.carousel-track {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.carousel-card {
+  width: 400px;
+  min-height: 250px;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.carousel-card:hover {
+  transform: scale(1.2);
+  z-index: 10;
+}
+
+.carousel-card:hover .card-glow {
+  border-color: var(--accent);
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+.card-glow {
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  transform: translateZ(0);
+}
+
+.commit-graph {
+  position: relative;
+  height: 150px; /* Increase height for better visibility */
+  border-top: 2px solid #ccc; /* Optional: visual separation */
+  overflow: visible; /* Change to visible to allow tooltips to show */
+}
+
+.commit-node {
+  position: absolute;
+  bottom: 0; /* Align to the bottom of the graph */
+  cursor: pointer;
+  opacity: 0; /* Start hidden */
+  animation: moveIn 0.5s ease forwards; /* Animation for moving in */
+}
+
+.commit-node.start {
+  left: 0; /* Start at the first node's position */
+}
+
+.commit-dot {
+  width: 25px; /* Decrease size of the commit dot */
+  height: 25px; /* Ensure height matches width */
+  background-color: #00ff9d; /* Color of the commit dot */
+  border-radius: 50%;
+  border: 2px solid white; /* White outline */
+  transition: transform 0.2s;
+}
+
+@keyframes drawLine {
+  from {
+    width: 0; /* Start from 0 width */
+  }
+  to {
+    width: 100%; /* Expand to full width */
+  }
+}
+
+.commit-line {
+  position: absolute;
+  bottom: 12.5px; /* Center the line vertically */
+  height: 2px; /* Thickness of the line */
+  background-color: #00ff9d; /* Color of the line */
+  width: 0; /* Start with 0 width */
+  transform: translateX(-50%); /* Center the line */
+  opacity: 1; /* Ensure the line is visible */
+  animation: drawLine 0.5s ease forwards; /* Animation for drawing the line */
+}
+
+.commit-node:hover .commit-dot {
+  transform: scale(1.5); /* Scale up on hover */
+}
+
+.commit-node:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 40px; /* Position above the dot */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.9); /* Darker background for better contrast */
+  color: white;
+  padding: 16px 20px; /* Increase padding for a more spacious look */
+  border-radius: 8px; /* More rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  white-space: normal; /* Allow text to wrap */
+  font-size: 18px; /* Larger font size */
+  z-index: 1000; /* Ensure it appears above other elements */
+  max-width: 300px; /* Increase max width for tooltip */
+  overflow: visible; /* Allow overflow to show */
+  opacity: 0; /* Start hidden */
+  transition: opacity 0.2s ease; /* Smooth transition */
+}
+
+.commit-node:hover::after {
+  opacity: 1; /* Show on hover */
+}
+
+@keyframes moveIn {
+  0% {
+    transform: translateX(0); /* Start at the first node */
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0); /* Final position */
+    opacity: 1;
+  }
+}
+
+@keyframes moveOut {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
 }

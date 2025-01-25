@@ -1,0 +1,85 @@
+/* General modal styles */
+.modal {
+  background-color: #ffffff; /* White background for the modal */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  max-width: 900px; /* Increased width for the modal */
+  width: 90%; /* Responsive width */
+}
+
+/* Header styles */
+.markdown h1 {
+  font-size: 2.5em; /* Larger font size for main headings */
+  margin-bottom: 0.5em;
+  color: var(--accent); /* Use accent color for headings */
+  border-bottom: 2px solid var(--accent); /* Underline for emphasis */
+  padding-bottom: 0.3em; /* Padding for spacing */
+}
+
+.markdown h2 {
+  font-size: 2em; /* Slightly smaller than h1 */
+  margin-bottom: 0.5em;
+  color: var(--accent); /* Use accent color for subheadings */
+}
+
+.markdown h3 {
+  font-size: 1.5em; /* Smaller than h2 */
+  margin-bottom: 0.5em;
+  color: #7f8c8d; /* Grey color for h3 */
+}
+
+/* Paragraph styles */
+.markdown p {
+  margin-bottom: 1em;
+  line-height: 1.6; /* Increased line height for readability */
+  color: var(--foreground); /* Use foreground color for text */
+}
+
+/* List styles */
+.markdown ul {
+  margin-left: 1.5em; /* Indentation for lists */
+  margin-bottom: 1em;
+  list-style-type: disc; /* Bullet points */
+}
+
+.markdown li {
+  margin-bottom: 0.5em; /* Spacing between list items */
+  color: var(--foreground); /* Use foreground color for list items */
+}
+
+/* Code styles */
+.markdown code {
+  background-color: rgba(0, 255, 157, 0.2); /* Light green background for inline code */
+  padding: 0.2em 0.4em; /* Padding for inline code */
+  border-radius: 4px; /* Rounded corners */
+  font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
+  color: #ffffff; /* Change text color to white for better readability */
+}
+
+.markdown pre {
+  background-color: rgba(0, 255, 157, 0.1); /* Light green background for code blocks */
+  padding: 1em; /* Padding for code blocks */
+  border-radius: 4px; /* Rounded corners */
+  overflow-x: auto; /* Horizontal scroll for long lines */
+  border-left: 4px solid var(--accent); /* Left border for emphasis */
+  color: #ffffff; /* Change text color to white for better readability */
+}
+
+/* Blockquote styles */
+.markdown blockquote {
+  border-left: 4px solid var(--accent); /* Left border for blockquotes */
+  padding-left: 1em; /* Padding for blockquote */
+  color: #7f8c8d; /* Grey color for blockquote text */
+  font-style: italic; /* Italic style for blockquote */
+  margin: 1em 0; /* Margin for spacing */
+}
+
+/* Link styles */
+.markdown a {
+  color: var(--accent); /* Use accent color for links */
+  text-decoration: none; /* Remove underline */
+}
+
+.markdown a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
