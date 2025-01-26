@@ -24,9 +24,9 @@ There are two views, the public view which grabs all current changelogs to any r
 
 As for the developer side it is behind an auth wall, There is a button to generate changelogs as well as a very beautiful commit line that allows you to view all commits, ( which I was very proud of :) ), once signed in, you can view all of your personal repositories, and then select whatever repo you would like to investigate more! 
 
-#### Interesting notes
 For the LLM, I decided to use groq, which was inspired by their insanely fast inference time, which allows even GIANT prompts that are coming in such as all of the git diffs going from commit to commit, to be processed within 2-4 seconds, because what user or dev wants to wait.
 
+#### Interesting notes
 As for AI tools used, I utilized Cursor to make burner templates and first drafts of pages and then built them up, I also used it to debug very fast and complete grunt work tasks to be as efficient as possible, build more and ship more!!
 
 
