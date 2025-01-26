@@ -4,7 +4,7 @@ Change is a little app I built to make AI changelogs easily creatable as well as
 
 ## Getting Started
 ### Public
-Simply visit this [link](https://www.chainge-mocha.vercel.app) and you can view the publicly deployed version of the app.
+Simply visit this [link](https://chainge-mocha.vercel.app/)and you can view the publicly deployed version of the app.
 
 ### Run it yourself!
 If you would like to run it locally, clone the repo, install all dependencies with "npm i", and run it with "npm run dev", along with that you must create keys for github Oauth, next-auth, and mongodb to store in an env.
